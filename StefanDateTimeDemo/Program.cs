@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace StefanDateTimeDemo
 {
@@ -81,13 +83,110 @@ namespace StefanDateTimeDemo
             Console.WriteLine($"{invoiceDatum} {forfalloDatum}");
         }
 
+       
+
+        static void DateTimeLista()
+        {
+            //DateTime []allaDateTimes =new DateTime[antal];
+            List<DateTime> allaDateTimes = new List<DateTime>();
+            while (true)
+            {
+                Console.WriteLine("*** Viktiga datum ***");
+                Console.WriteLine("1. Lägg till nytt datum");
+                Console.WriteLine("2. Skriv ut alla datum");
+                Console.WriteLine("3. Skriv ut hutr många datuim det fionns");
+                var choice = Console.ReadLine();
+                if (choice == "1")
+                {
+                    if (allaDateTimes.Count > 10)
+                    {
+                        Console.WriteLine("DU får inte stoppa in fler. Betala extra om mer än 10");
+                        continue; 
+                    }
+                    var input = Console.ReadLine();
+                    DateTime dt = DateTime.ParseExact(input, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    allaDateTimes.Add(dt);
+                }
+                if (choice == "2")
+                {
+                    foreach(var dt in allaDateTimes)
+                    {
+                        Console.WriteLine($"{dt}");
+                    }
+                }
+                if (choice == "3")
+                {
+                    Console.WriteLine($"Det finns {allaDateTimes.Count} i lådan");
+                }
+
+
+            }
+            Console.WriteLine("Hejhej");
+        }
+
         static void Main(string[] args)
         {
-            CreateInvoice();
+            HockeyListan();
+            //DateTimeLista();
+            //CreateInvoice();
             //ReadDateFromUser();
             //SkapaDatumOchSkrivUt();
             //ConstructAnyDate();
             //DateDiff();
         }
+
+        public class Player
+        {
+            public string Name { get; set; }
+            public int JerseyNumber { get; set; }
+            public string TeamName { get; set; }
+        }
+
+        //public class Team
+        //{
+        //    public string TeamName { get; set; }
+        //    public List<Player> 
+        //}
+
+
+        static void HockeyListan()
+        {
+            //DateTime []allaDateTimes =new DateTime[antal];
+            List<Player> allPlayers = new List<Player>();
+            while (true)
+            {
+                Console.WriteLine("*** Viktiga datum ***");
+                Console.WriteLine("1. Lägg till spelare");
+                Console.WriteLine("2. Skriv ut alla spelare");
+                Console.WriteLine("3. Change player");
+                Console.WriteLine("54. Save all players to file");
+                var choice = Console.ReadLine();
+                if (choice == "1")
+                {
+                    Console.WriteLine("Namn:");
+                    var namn = Console.ReadLine();
+                    Console.WriteLine("Jersey:");
+                    var j = Console.ReadLine();
+                    Console.WriteLine("Team:");
+                    var t = Console.ReadLine();
+
+                    Player newPlayer = new Player();
+                    newPlayer.JerseyNumber = Convert.ToInt32(j);
+                    newPlayer.Name = namn;
+                    newPlayer.TeamName = t;
+
+                    allPlayers.Add(newPlayer);
+                }
+                if (choice == "2")
+                {
+                    foreach (var player in allPlayers)
+                    {
+                        Console.WriteLine($"{player.Name} has jersey {player.JerseyNumber} and plays for {player.TeamName}");
+                    }
+                }
+
+            }
+        }
+
     }
 }
